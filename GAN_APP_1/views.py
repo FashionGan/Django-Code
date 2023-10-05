@@ -10,11 +10,9 @@ def home(request):
 
 def getPhotos(request):
     api  = API(settings.PEXELS_API_KEY)
-    print(api)
 
     endpoint = 'https://api.pexels.com/v1/curated'
     
     images = api.search(endpoint, results_per_page=15)['photos']
-    print(images)
 
     return render(request, 'index.html', {'image': images})
