@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Index Page</title>
+</head>
+<body>
+
+    <nav class="flex space-x-10 p-4 border-b-2">
+        <li class="flex list-none">First</li>
+        <li class="flex list-none">Second</li>
+        <li class="flex list-none">Third</li>
+        <li class="flex list-none">Fourth</li>
+        <li class="flex list-none">Fifth</li>
+    </nav>
+
+    <!-- Make it h-full after adding some contents into divs-->
+    <div id="Main_div" class="flex h-full">
+
+        <div id="left_side_section" class="flex basis-1/5 bg-black">
+            01
+        </div>
+    
+        <div id="middle_section" class="flex flex-wrap space-x-5 space-y-5 basis-3/5 bg-slate-50 p-5">
+            {% for images in image%}
+                <img class="flex flex-row h-64 w-64" src="{{ images.src.large }}" alt="">
+            {% endfor %}
+        </div>
+    
+        <div id="right_side_section" class="flex basis-1/5 bg-zinc-600">
+            03
+        </div>
+
+    </div>
+    
+</body>
+</html>
