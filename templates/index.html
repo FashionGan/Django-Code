@@ -24,8 +24,8 @@
         </div>
     
         <div id="middle_section" class="flex flex-wrap basis-3/5 bg-slate-50 p-5 justify-center">
-            {% for images in image%}
-                <img class="flex flex-row h-64 w-64 p-1" src="{{ images.src.large }}" alt="">
+            {% for images in image %}
+                <img class="flex flex-row h-64 w-64 p-2 border-2 rounded-full" src="data:image/png;base64, {{ images }}" alt="Some Problem">
             {% endfor %}
         </div>
     
