@@ -1,29 +1,25 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 from pexels_api import API
 from django.conf import settings
 import tensorflow as tf
 from tensorflow import keras
 import base64
 from io import BytesIO
-
-# Create your views here.
-def home(request):
-    return render(request, 'index.html')
     
 
 def generate_images(request):
     generator = keras.models.load_model("generator_model.h5")
 
-    batch_size = 8
+    batch_size = 7
     latent_dim = 128
 
     random_latent_vectors = tf.random.normal(shape=(batch_size, latent_dim))
 
     fake = generator(random_latent_vectors)
 
-    image_list = []
+    image_info = {}
 
-    for i in range(5):
+    for i in range(4):
         img = keras.preprocessing.image.array_to_img(fake[i])
         
         buffer = BytesIO()
@@ -33,9 +29,10 @@ def generate_images(request):
         # Encode as base64 and convert to string
         img_bytes = base64.b64encode(buffer.getvalue()).decode('utf-8')  
 
-        image_list.append(img_bytes)
+        image_info['img_' + str(i)] = img_bytes
 
-    context = {'image': image_list}
+
+    context = {'image': image_info}
 
     return render(request, 'index.html', context)
 
@@ -45,6 +42,6 @@ def getPhotos(request):
 
     endpoint = 'https://api.pexels.com/v1/curated'
     
-    images = api.search(endpoint, results_per_page=15)['photos']
+    images = api.search(endpoint, results_per_page = 10)['photos']
 
     return render(request, 'index.html', {'image': images})

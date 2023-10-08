@@ -23,10 +23,15 @@
             01
         </div>
     
-        <div id="middle_section" class="flex flex-wrap basis-3/5 bg-slate-50 p-5 justify-center">
-            {% for images in image %}
-                <img class="flex flex-row h-64 w-64 p-2 border-2 rounded-full" src="data:image/png;base64, {{ images }}" alt="Some Problem">
-            {% endfor %}
+        <div id="middle_section" class="flex flex-wrap basis-3/5 bg-slate-50 p-2 justify-center">
+            {% for image_name, image_bytes in image.items %}
+                <form action="" method="">
+                    <div id="image_sec" class="flex flex-col">
+                        <img class="flex flex-row h-64 w-64 p-2 border-2 rounded-full m-4" src="data:image/png;base64, {{ image_bytes }}" alt="{{ image_name }}">
+                        <button class="flex justify-center" name="image_btn" onclick="alert('This is a msg {{ image_name }}')"> Add to Collection </button>
+                    </div> 
+                </form> 
+            {% endfor %} 
         </div>
     
         <div id="right_side_section" class="flex basis-1/5 bg-zinc-600">
