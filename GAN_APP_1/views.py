@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from pexels_api import API
 from django.conf import settings
 import tensorflow as tf
@@ -6,6 +6,8 @@ from tensorflow import keras
 import base64
 from io import BytesIO
     
+def home(request):
+    return render(request, 'index.html')
 
 def generate_images(request):
     generator = keras.models.load_model("generator_model.h5")
@@ -45,3 +47,7 @@ def getPhotos(request):
     images = api.search(endpoint, results_per_page = 10)['photos']
 
     return render(request, 'index.html', {'image': images})
+
+
+def team(request):
+    return render(request, 'teamMembersPage.html')
