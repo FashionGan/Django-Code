@@ -6,14 +6,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Index Page</title>
 </head>
-<body>
+<body class="bg-[#EAEAEA]">
 
-    <nav class="flex space-x-10 p-4 border-b-2">
-        <li class="flex list-none"><a href="/">Home</a></li>
-        <li class="flex list-none"><a href="/collection/">My Collection</a></li>
-        <li class="flex list-none">Third</li>
-        <li class="flex list-none">Fourth</li>
-        <li class="flex list-none"><a href="/team/">Team</a></li>
+    <nav class="flex space-x-10 p-4 bg-black place-content-center space-x-20">
+        <li class="flex list-none text-2xl text-[#EAEAEA] font-extrabold font-serif"><a href="/">Home</a></li>
+        <li class="flex list-none text-2xl text-[#EAEAEA] font-extrabold font-serif"><a href="/collection/">My Collection</a></li>
+        <li class="flex list-none text-2xl text-[#EAEAEA] font-extrabold font-serif">Third</li>
+        <li class="flex list-none text-2xl text-[#EAEAEA] font-extrabold font-serif">Fourth</li>
+        <li class="flex list-none text-2xl text-[#EAEAEA] font-extrabold font-serif"><a href="/team/">Team</a></li>
     </nav>
 
     <!-- Make it h-full after adding some contents into divs-->
@@ -37,7 +37,7 @@
 
         </div>
     
-        <div id="middle_section" class="flex flex-wrap basis-3/5 bg-slate-50 p-2 justify-center">
+        <div id="middle_section" class="flex flex-wrap basis-4/5 p-2 justify-center">
 
             {% block image_section %}
 
@@ -64,10 +64,6 @@
 
             {% endblock image_section %}
 
-        </div>
-    
-        <div id="right_side_section" class="flex basis-1/5 justify-center p-1 bg-zinc-600">
-            <div id="heading" class="text-2xl font-bold text-white">My Collection</div>
         </div>
 
     </div>
