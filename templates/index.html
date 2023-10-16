@@ -10,32 +10,64 @@
 
     <nav class="flex space-x-10 p-4 border-b-2">
         <li class="flex list-none"><a href="/">Home</a></li>
-        <li class="flex list-none">Second</li>
+        <li class="flex list-none"><a href="/collection/">My Collection</a></li>
         <li class="flex list-none">Third</li>
         <li class="flex list-none">Fourth</li>
         <li class="flex list-none"><a href="/team/">Team</a></li>
     </nav>
 
     <!-- Make it h-full after adding some contents into divs-->
-    <div id="Main_div" class="flex h-full">
+    <div id="Main_div" class="flex h-screen">
 
-        <div id="left_side_section" class="flex basis-1/5 bg-black">
-            01
+        <div id="left_side_section" class="flex flex-col basis-1/5 border-r-4 p-2">
+
+            <form action="/" method="post" class="flex flex-col space-y-10 w-full justify-center items-center">
+                {% csrf_token %}
+
+                <select class="flex w-2/3 border-2 rounded-lg p-1 text-xl font-bold text-center" name="dropdown" id="">
+                    <option value="Half T-shirt">Half T-shirt</option>
+                    <option value="Full T-shirt">Full T-shirt</option>
+                    <option value="Hoddies">Hoddies</option>
+                </select>
+
+    
+                <input type="submit" name="btn_name" value="Generate Images" class="flex border-2 rounded-lg p-2 text-xl font-bold">
+
+            </form>
+
         </div>
     
         <div id="middle_section" class="flex flex-wrap basis-3/5 bg-slate-50 p-2 justify-center">
-            {% for image_name, image_bytes in image.items %}
-                <form action="" method="">
-                    <div id="image_sec" class="flex flex-col">
-                        <img class="flex flex-row h-64 w-64 p-2 border-2 rounded-full m-4" src="data:image/png;base64, {{ image_bytes }}" alt="{{ image_name }}">
-                        <button class="flex justify-center" name="image_btn" onclick="alert('This is a msg {{ image_name }}')"> Add to Collection </button>
-                    </div> 
-                </form> 
-            {% endfor %} 
+
+            {% block image_section %}
+
+                {% if image %}
+
+                    {% for image_name, image_bytes in image.items %}
+
+                        <form action="/" method="post">
+                            {% csrf_token %}
+                            <div id="image_sec" class="flex flex-col">
+                                <img name="image_name" class="flex flex-row h-64 w-64 p-2 border-2 rounded-full m-4" src="data:image/png;base64, {{ image_bytes }}" alt="{{ image_name }}">
+                                <input type="text" name="image_string" value="{{ image_bytes }}" hidden>
+                                <button class="flex justify-center" type="submit" name="btn_name" value="add_to_collection" onclick="alert('This is a msg {{ image_name }}')"> Add to Collection </button>
+                            </div> 
+                        </form> 
+
+                    {% endfor %}
+                
+                {% else %}
+
+                    Don't You think You should use left section
+
+                {% endif %}
+
+            {% endblock image_section %}
+
         </div>
     
-        <div id="right_side_section" class="flex basis-1/5 bg-zinc-600">
-            03
+        <div id="right_side_section" class="flex basis-1/5 justify-center p-1 bg-zinc-600">
+            <div id="heading" class="text-2xl font-bold text-white">My Collection</div>
         </div>
 
     </div>

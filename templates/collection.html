@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Collection</title>
+</head>
+<body>
+
+    {% if image %}
+
+        {% for image in image %}
+
+        <div id="image_sec" class="flex flex-col">
+            <img name="image_name" class="flex flex-row h-64 w-64 p-2 border-2 rounded-full m-4" src="data:image/png;base64, {{ image.image_bytes }}" alt="{{ image.image_name }}">
+            <input type="text" name="image_string" value="{{ image.image_id }}" hidden>
+        </div> 
+        
+        {% endfor %}
+                
+    {% else %}
+
+        Don't You think You should Generate Images --> Add to Collection
+
+    {% endif %}
+    
+</body>
+</html>
