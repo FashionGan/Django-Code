@@ -39,9 +39,9 @@ def generate(request):
 
 
 def generate_images():
-    generator = keras.models.load_model("generator_model.h5")
+    generator = keras.models.load_model("generator_model-1.h5")
 
-    batch_size = 7
+    batch_size = 5
     latent_dim = 128
 
     random_latent_vectors = tf.random.normal(shape=(batch_size, latent_dim))
@@ -50,7 +50,7 @@ def generate_images():
 
     image_info = {}
 
-    for i in range(5):
+    for i in range(1):
         img = keras.preprocessing.image.array_to_img(fake[i])
         
         buffer = BytesIO()
