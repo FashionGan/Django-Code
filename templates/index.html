@@ -15,7 +15,7 @@
     </nav>
 
     <!-- Make it h-full after adding some contents into divs-->
-    <div id="Main_div" class="flex h-screen">
+    <div id="Main_div" class="flex h-full">
 
         <div id="left_side_section" class="flex flex-col basis-1/5 border-r-4 border-[#645577] p-2">
 
@@ -23,6 +23,7 @@
                 {% csrf_token %}
 
                 <select class="flex w-2/3 border-2 font-serif rounded-lg p-2 text-xl font-bold text-center justify-center bg-[#645577] text-[#EAEAEA]" name="dropdown" id="">
+                    <option class="flex text-xl font-serif" value="Mixed">Mixed</option>
                     <option class="flex text-xl font-serif" value="Half T-shirt">Half T-Shirt</option>
                     <option class="flex text-xl font-serif" value="Full T-shirt">Full T-Shirt</option>
                     <option class="flex text-xl font-serif" value="Hoddies">Hoddies</option>
@@ -47,10 +48,10 @@
                             {% csrf_token %}
                             <div id="image_sec" class="flex flex-col justify-center items-center">
                                 <div id="image_sec" class="flex flex-col rounded-lg items-center transition ease-in-out hover:-translate-y-2 hover:scale-110">
-                                    <img name="image_name" class="flex flex-row h-80 w-80 p-2 rounded-lg p-4 border-2 m-4" src="data:image/png;base64, {{ image_bytes }}" alt="{{ image_name }}">
+                                    <img name="image_name" class="flex flex-row h-80 w-80 p-2 rounded-lg p-4 m-4" src="data:image/png;base64, {{ image_bytes }}" alt="{{ image_name }}">
                                 </div>
                                 <input type="text" name="image_string" value="{{ image_bytes }}" hidden>
-                                <button class="flex justify-center text-lg font-bold font-serif bg-[#645577] rounded-lg text-[#EAEAEA] hover:shadow-xl p-4 w-fit" type="submit" name="btn_name" value="add_to_collection" onclick="alert('This is a msg {{ image_name }}')"> Add to Collection </button>
+                                <button class="flex justify-center text-lg font-bold font-serif bg-[#645577] rounded-lg text-[#EAEAEA] hover:shadow-xl p-4 w-fit" type="submit" name="btn_name" value="add_to_collection"> Add to Collection </button>
                             </div> 
                         </form> 
 
@@ -58,7 +59,7 @@
                 
                 {% else %}
 
-                    Don't You think You should use left section
+                    <span class="flex h-screen">Don't You think You should use left section</span>
 
                 {% endif %}
 

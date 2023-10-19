@@ -1,5 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse
-from pexels_api import API
+from django.shortcuts import render
 from django.conf import settings
 import tensorflow as tf
 from tensorflow import keras
@@ -7,14 +6,36 @@ import base64
 from io import BytesIO
 from .models import Collection
 
+
+cache_context = {}
+    
+    
 cache_context = {}
     
 def home(request):
     if request.method == 'POST':
         if request.POST.get('btn_name') == 'Generate Images':
-            context = generate_images()
+            fashion_type = request.POST.get('dropdown')
+
+            model = 'generator_model-1.h5'
+
+            if fashion_type == 'Half T-shirt':
+                model = 'generator_model_half_sleeves.h5'
+
+            elif fashion_type == 'Hoddies':
+                model = 'generator_model_hoodies.h5'
+
+            elif fashion_type == 'Full T-shirt':
+                model = 'generator_model_full_sleeves.h5'
+            
+
+            # print(fashion_type, model)
+            context = generate_images(model)
+
+            # print(fashion_type, model)
 
             return render(request, 'index.html', context)
+            # return render(request, 'index.html')
         
         elif request.POST.get('btn_name') == 'add_to_collection':
             image_name = request.POST.get('image_string')
@@ -34,14 +55,10 @@ def getCollection(request):
     return render(request, 'collection.html', context = context)
 
 
-def generate(request):
-    return render (request, 'image_page.html')
+def generate_images(model):
+    generator = keras.models.load_model(model)
 
-
-def generate_images():
-    generator = keras.models.load_model("generator_model-1.h5")
-
-    batch_size = 5
+    batch_size = 6
     latent_dim = 128
 
     random_latent_vectors = tf.random.normal(shape=(batch_size, latent_dim))
@@ -50,7 +67,7 @@ def generate_images():
 
     image_info = {}
 
-    for i in range(1):
+    for i in range(5):
         img = keras.preprocessing.image.array_to_img(fake[i])
         
         buffer = BytesIO()
@@ -68,16 +85,6 @@ def generate_images():
     cache_context = context
 
     return context
-
-
-def getPhotos(request):
-    api  = API(settings.PEXELS_API_KEY)
-
-    endpoint = 'https://api.pexels.com/v1/curated'
-    
-    images = api.search(endpoint, results_per_page = 10)['photos']
-
-    return render(request, 'index.html', {'image': images})
 
 
 def team(request):
