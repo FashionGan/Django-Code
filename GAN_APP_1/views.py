@@ -19,14 +19,14 @@ def home(request):
 
             model = 'generator_model-1.h5'
 
-            # if fashion_type == 'Half T-shirt':
-            #     model = 'generator_model_half_sleeves.h5'
+            if fashion_type == 'Half T-shirt':
+                model = 'generator_model_half.h5'
 
-            # elif fashion_type == 'Hoddies':
-            #     model = 'generator_model_hoodies.h5'
+            elif fashion_type == 'Hoddies':
+                model = 'generator_model_hoodies.h5'
 
-            # elif fashion_type == 'Full T-shirt':
-            #     model = 'generator_model_full_sleeves.h5'
+            elif fashion_type == 'Full T-shirt':
+                model = 'generator_model_full.h5'
             
 
             # print(fashion_type, model)
